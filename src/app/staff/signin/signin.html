@@ -1,0 +1,28 @@
+<div class="sign-in">
+  <header *ngIf="showName">{{ companyName }}</header>
+  
+  <div>
+    <h1>Sign In</h1>
+    <form [formGroup]="signinForm" (ngSubmit)="submitForm()">
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Staff ID</mat-label>
+        <input matInput type="text" formControlName="staffId" />
+        <mat-icon matPrefix>badge</mat-icon>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+        <mat-icon matPrefix>lock</mat-icon>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button" aria-label="Toggle password visibility">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      
+      <button mat-raised-button color="primary" type="submit" class="submit-button">
+        <mat-icon>login</mat-icon>
+        Sign In
+      </button>
+    </form>
+  </div>
+</div>

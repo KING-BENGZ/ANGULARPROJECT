@@ -1,0 +1,79 @@
+<div class="staff-view-container">
+  <!-- Header -->
+  <div class="staff-header">
+    <h2>Staff View</h2>
+  </div>
+
+  <!-- Summary Metrics -->
+  <div class="staff-summary">
+    <div class="summary-card signins">
+      <h3>Times Signed In</h3>
+      <p>{{ signIns }}</p>
+    </div>
+    <div class="summary-card lateness">
+      <h3>Lateness Count</h3>
+      <p>{{ latenessCount }}</p>
+    </div>
+    <div class="summary-card deductions">
+      <h3>Deductions</h3>
+      <p>{{ deductions | currency: '₦' }}</p>
+    </div>
+  </div>
+
+  <!-- Staff Sign-in History - Card Containers -->
+  <div class="table-section">
+    <h3>Sign-in History</h3>
+    <div class="signin-cards-container">
+      <div class="signin-card" *ngFor="let record of signInHistory" [ngClass]="record.status.toLowerCase()">
+        <div class="signin-card-header">
+          <div class="date-badge">
+            <span class="date-day">{{ getDay(record.date) }}</span>
+            <span class="date-month">{{ getMonth(record.date) }}</span>
+          </div>
+          <div class="status-badge" [ngClass]="record.status.toLowerCase()">
+            <span class="status-icon">{{ record.status === 'Present' ? '✓' : '⚠' }}</span>
+            <span class="status-text">{{ record.status }}</span>
+          </div>
+        </div>
+        <div class="signin-card-body">
+          <div class="time-display">
+            <mat-icon class="time-icon">schedule</mat-icon>
+            <span class="time-text">{{ record.timeIn }}</span>
+          </div>
+          <div class="date-display">
+            <mat-icon class="date-icon">calendar_today</mat-icon>
+            <span class="date-text">{{ formatDate(record.date) }}</span>
+          </div>
+        </div>
+        <div class="signin-card-footer">
+          <div class="card-glow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Staff List Table -->
+  <div class="table-section">
+    <h3>All Staff</h3>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Staff ID</th>
+            <th>Department</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let staff of staffList">
+            <td>{{ staff.name }}</td>
+            <td>{{ staff.id }}</td>
+            <td>{{ staff.department }}</td>
+            <td>{{ staff.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
